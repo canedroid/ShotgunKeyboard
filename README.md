@@ -50,14 +50,11 @@ that folder and rebuild the `.exe` to include it — the script loads every
 
 ```
 ├── Shotgun_keyboard/
-│   ├── soundboard.py            # Original script (requires pygame)
 │   ├── soundboard_fixed.py      # Main app (tray + winsound, no pygame)
 │   └── ShotgunSoundboard/       # 13 shotgun .wav files
-├── Sounds/                      # Original .mp3 sound effects
-├── shotgun_keyboard.py          # pynput-based variant (requires miniconda)
-├── shotgun_keyboard.ahk         # AutoHotkey variant
-├── shotgun_tray.py              # pynput + pystray variant
-└── ...mp3                       # Original source sound pack
+├── README.md
+├── LICENSE
+└── .gitignore
 ```
 
 ## Notes
