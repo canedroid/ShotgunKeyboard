@@ -2,6 +2,7 @@ import random
 import os
 import glob
 import sys
+import threading
 import keyboard
 import winsound
 import pystray
@@ -19,11 +20,20 @@ if not sounds:
     sys.exit(1)
 
 running = True
+playing_lock = threading.Lock()
 
 def play_random_shotgun(e):
-    if sounds and running:
-        random_sound = random.choice(sounds)
-        winsound.PlaySound(random_sound, winsound.SND_ASYNC | winsound.SND_FILENAME)
+    if not (sounds and running):
+        return
+    if not playing_lock.acquire(blocking=False):
+        return
+    sound = random.choice(sounds)
+    def _play():
+        try:
+            winsound.PlaySound(sound, winsound.SND_FILENAME)
+        finally:
+            playing_lock.release()
+    threading.Thread(target=_play, daemon=True).start()
 
 def create_icon():
     img = Image.new('RGB', (64, 64), color='black')
