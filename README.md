@@ -11,7 +11,19 @@ A fun Windows tray application that plays a random shotgun sound every time you 
 - Fully self-contained portable `.exe` — no Python or dependencies required
 - Auto-elevates to Administrator on launch for global keyboard hook
 - **ESC** plays a sound like any other key (does not quit)
+- Choose between **Interrupt**, **Queue**, or **Discard** playback modes from
+  the tray menu
 - Right-click the tray icon → **Quit** to exit
+
+## Playback modes
+
+Pick a behavior via the tray icon → **Playback Mode** (default: Discard):
+
+| Mode | What happens when you press another key while one sound is playing |
+|------|-------------------------------------------------------------------|
+| **Interrupt** | The new keypress cuts off the current sound and starts a new one |
+| **Queue** | The new keypress is queued and plays right after the current sound finishes (can build a long backlog while typing) |
+| **Discard** | Keypresses during playback are ignored; the next sound starts only for a key pressed after the current one ends |
 
 ## Usage
 
@@ -50,7 +62,7 @@ that folder and rebuild the `.exe` to include it — the script loads every
 
 ```
 ├── Shotgun_keyboard/
-│   ├── soundboard_fixed.py      # Main app (tray + winsound, no pygame)
+│   ├── soundboard_fixed.py      # Main app (tray + winsound + playback modes)
 │   └── ShotgunSoundboard/       # 13 shotgun .wav files
 ├── README.md
 ├── LICENSE
